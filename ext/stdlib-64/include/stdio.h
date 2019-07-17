@@ -14,30 +14,17 @@
  * limitations under the License.
  */
 
-#include "stdlib/include/stdio.h"
-#include "stdlib/include/kernel.h"
-#include "stdlib/include/swis.h"
 
-int main( int argc, char **argv ) {
+#ifndef STDIO_H
+#define STDIO_H
 
-	struct _kernel_regs in, out;
+	// sprintf
+	int sprintf( char *s );
 
-	in.r[0] = 0x01;
-	in.r[1] = 0x77;
-	in.r[2] = 0x99;
-	in.r[3] = 0xdd;
-	_kernel_swi( OS_SetColour, &in, &out );
+	// variations on a theme for simplicity
+	int sprintf_i( char *s, int i );
 
-	sprintf( "Hello, userland\n" );
+    int getchar( void );
+    char *gets( char *s );
 
-	in.r[0] = 0x01;
-	in.r[1] = 0xff;
-	in.r[2] = 0xff;
-	in.r[3] = 0xff;
-	_kernel_swi( OS_SetColour, &in, &out );
-
-	// use the OS to exit this process formally
-    _kernel_swi( OS_ProcessExit, &in, &out );
-	return 0;
-
-}
+#endif /*STDIO_H*/
