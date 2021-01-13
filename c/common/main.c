@@ -15,28 +15,16 @@
  */
 
 #include "stdio.h"
+#include "stdlib.h"
 #include "swi.h"
 
 int main( int argc, char **argv ) {
 
-	struct _kernel_regs in, out;
+    sprintf( "Hello, userland\n" );
 
-	in.r[0] = 0x01;
-	in.r[1] = 0x77;
-	in.r[2] = 0x99;
-	in.r[3] = 0xdd;
-	_kernel_swi( OS_SetColour, &in, &out );
+    // use the OS (via stdlib's "process_exit" function) to exit this process formally
+    process_exit();
 
-	sprintf( "Hello, userland\n" );
-
-	in.r[0] = 0x01;
-	in.r[1] = 0xff;
-	in.r[2] = 0xff;
-	in.r[3] = 0xff;
-	_kernel_swi( OS_SetColour, &in, &out );
-
-	// use the OS to exit this process formally
-    _kernel_swi( OS_ProcessExit, &in, &out );
-	return 0;
+    return 0;
 
 }

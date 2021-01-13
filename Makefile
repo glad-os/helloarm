@@ -105,7 +105,7 @@ clean:
 # hello
 
 HELLO_HOME 		= .
-HELLO_INCLUDES		= -I $(HELLO_HOME)/ext/stdlib-$(ISA_TYPE)/include
+HELLO_INCLUDES		= -I $(HELLO_HOME)/../stdlib/c/common/include
 
 HELLO_FLAGS_C		= $(FLAGS_C) $(HELLO_INCLUDES)
 HELLO_FILES_C     	= $(patsubst %.c,%.o,$(shell find . -type f -name '*.c'))
@@ -115,7 +115,7 @@ hello-64: $(HELLO_FILES_C) $(STDLIB_FILES_C) hello
 
 hello: hello_c
 
-	$(LD)  	linker.ld -o hello.elf c/common/main.o ext/stdlib-$(ISA_TYPE)/stdlib-$(ISA_TYPE).a
+	$(LD)  	linker.ld -o hello.elf c/common/main.o ../stdlib/stdlib-$(ISA_TYPE).a
 
 	$(OBJCOPY) -I elf32-little -O binary --strip-debug --strip-unneeded --verbose hello.elf hello.bin 
 	$(OBJCOPY) hello.elf -O ihex hello.hex
