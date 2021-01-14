@@ -20,7 +20,7 @@
 
 int main( int argc, char **argv ) {
 
-    sprintf( "Hello, userland\n" );
+    printf( "Hello, userland\n" );
 
     // use the OS (via stdlib's "process_exit" function) to exit this process formally
     process_exit();
