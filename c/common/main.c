@@ -16,7 +16,6 @@
 
 #include "stdio.h"
 #include "stdlib.h"
-#include "swi.h"
 
 int main( int argc, char **argv ) {
 
